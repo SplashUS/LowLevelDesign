@@ -1,0 +1,27 @@
+Expected Design:
+
+Board
+Each board will have start with intial positions
+Each piece has respective Moves
+When there is checkmate one player wins
+Display in terminal - first phase
+
+
+Possible Extensions: 
+UI - Modeling...
+Multi Threading -- Multiple boards at once
+
+-----------------------
+
+Classes:
+
+Board
+Box -> Fixed constants eumerations
+Implementing Piece -> Pawn, Knight, Bishop, Rook, Queen, King
+User -> 
+
+Interface
+Pieces -> String: "", Pos "", Move   
+
+Enumeration: 
+Check whether white or Black
