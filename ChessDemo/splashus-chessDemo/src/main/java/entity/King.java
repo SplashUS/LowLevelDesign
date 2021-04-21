@@ -1,8 +1,11 @@
-package core;
-public class Pawn implements Piece{
+package entity;
+
+//import static constants.Piecename.*;
+public class King implements PieceIntf{
+    private static final String KING = "K";
     private String currentPos;
     
-    public Pawn(String pos) {
+    public King(String pos) {
         this.currentPos = pos;
     }
     public void move(String moveToPos) {
@@ -18,6 +21,10 @@ public class Pawn implements Piece{
     }
     private boolean isValidMove() {
         return false;
+    }
+    @Override
+    public String name() {        
+        return KING;
     }
 
     

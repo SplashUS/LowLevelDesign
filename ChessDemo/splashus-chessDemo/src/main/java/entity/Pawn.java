@@ -1,0 +1,30 @@
+package entity;
+//import static constants.Piecename.*;
+public class Pawn implements PieceIntf{
+    private static final String PAWN = "P";
+    private String currentPos;
+    
+    public Pawn(String pos) {
+        this.currentPos = pos;
+    }
+    public void move(String moveToPos) {
+        if (isValidMove()) {
+            movePawn(moveToPos);
+        }
+        else {
+            //handle otherwise case
+        }
+    }
+    private void movePawn(String moveToPos) {
+        this.currentPos = moveToPos;
+    }
+    private boolean isValidMove() {
+        return false;
+    }
+    @Override
+    public String name() {        
+        return PAWN;
+    }
+
+    
+}
