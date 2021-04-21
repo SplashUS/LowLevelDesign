@@ -1,3 +1,4 @@
+package core;
 public class Pawn implements Piece{
     private String currentPos;
     

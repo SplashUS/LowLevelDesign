@@ -1,3 +1,5 @@
+package core;
+
 public class Box {
     private String pos;
     private Piece piece;

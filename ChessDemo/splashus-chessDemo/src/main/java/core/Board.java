@@ -1,8 +1,10 @@
-import java.util.ArrayList;
+package core;
+import java.util.*;
 
-public class Board {
+public class Board{
     
     ArrayList<ArrayList<Box>> board = new ArrayList<ArrayList<Box>> ();
+    Piece p;
     
     public Board (){
         for (int i = 1 ; i <= 8; i++) {
@@ -13,7 +15,7 @@ public class Board {
                 pos.append(row);
                 pos.append(column);
                 String tempPos = pos.toString();
-                Piece p = getInitialPiece(i, j, tempPos);
+                p= getInitialPiece(i, j, tempPos);
                 //Box currentBox = new Box();
             }
         }
