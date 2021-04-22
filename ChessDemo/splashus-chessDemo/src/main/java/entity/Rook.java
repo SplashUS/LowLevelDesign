@@ -1,7 +1,6 @@
 package entity;
-//import static constants.Piecename.*;
-public class Rook implements PieceIntf{
-    private static final String ROOK = "R";
+import static constants.Piecename.*;
+public class Rook implements PieceIntf{   
     private String currentPos;
     
     public Rook(String pos) {

@@ -1,7 +1,7 @@
 package entity;
-//import static constants.Piecename.*;
+import static constants.Piecename.*;
 public class Queen implements PieceIntf{
-    private static final String QUEEN = "Q";
+
     private String currentPos;
     
     public Queen(String pos) {

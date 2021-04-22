@@ -1,6 +1,8 @@
 package constants;
 
 public class Piecename {
+
+
     public static final String PAWN="P";
     public static final String KING="K";
     public static final String QUEEN="Q";

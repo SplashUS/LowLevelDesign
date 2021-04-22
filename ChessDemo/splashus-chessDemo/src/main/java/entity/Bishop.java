@@ -1,8 +1,7 @@
 package entity;
 
-//import static constants.Piecename.*;
+import static constants.Piecename.*;
 public class Bishop implements PieceIntf{
-    private static final String BISHOP = "B";
     private String currentPos;
     
     public Bishop(String pos) {

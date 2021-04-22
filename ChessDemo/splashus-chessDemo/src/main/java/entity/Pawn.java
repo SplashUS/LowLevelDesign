@@ -1,7 +1,7 @@
 package entity;
-//import static constants.Piecename.*;
+import static constants.Piecename.*;
 public class Pawn implements PieceIntf{
-    private static final String PAWN = "P";
+ 
     private String currentPos;
     
     public Pawn(String pos) {
