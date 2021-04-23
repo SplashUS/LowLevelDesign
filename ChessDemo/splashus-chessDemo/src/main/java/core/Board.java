@@ -1,20 +1,17 @@
 package core;
 import java.util.*;
 
-import entity.Bishop;
-import entity.King;
-import entity.Knight;
-import entity.Pawn;
-import entity.PieceIntf;
-import entity.Queen;
-import entity.Rook;
+import entity.*;
+import util.PositionUtil;
 
 public class Board{
     
     ArrayList<ArrayList<Box>> board = new ArrayList<ArrayList<Box>> ();
+    PositionUtil display = new PositionUtil();
     PieceIntf piece;
     
     public Board (){
+        Box currentBox;
         
         for (int i = 1 ; i <= 8; i++) {
             ArrayList<Box> boardrow   = new ArrayList<Box> ();
@@ -25,78 +22,115 @@ public class Board{
                 pos.append(row);
                 pos.append(column);
                 String tempPos = pos.toString();
-                piece= getInitialPiece(i, j, tempPos);           
+                piece= display.getInitialPiece(new Position(i,j), tempPos);           
                 
-                Box currentBox = new Box(tempPos,piece);
+                currentBox = new Box(tempPos,piece);
                 boardrow.add(currentBox);
             }
             board.add(boardrow);
         }
 
-        displayCurrPos(board);
+         display.displayCurrPos(board);
+
         
     }
     
 
 
-    public PieceIntf getInitialPiece(int row, int column, String tempPos) { 
+    public void start() {
 
-        switch (row) {
-            case 7: {PieceIntf p = new Pawn(tempPos); return p;}
-            case 2: {PieceIntf p = new Pawn(tempPos); return p;}
-            case 3: {return null;}
-            case 4: {return null;}
-            case 5: {return null;}
-            case 6: {return null;}
-            case 1: {
-                switch (column) {
-                    case 65: {PieceIntf p = new Rook(tempPos); return p;}
-                    case 72: {PieceIntf p = new Rook(tempPos); return p;}
-                    case 66: {PieceIntf p = new Knight(tempPos); return p;}
-                    case 71: {PieceIntf p = new Knight(tempPos); return p;}
-                    case 67: {PieceIntf p = new Bishop(tempPos); return p;}
-                    case 70: {PieceIntf p = new Bishop(tempPos); return p;}
-                    case 68: {PieceIntf p = new King(tempPos); return p;}
-                    case 69: {PieceIntf p = new Queen(tempPos); return p;}
-                    default:  {return null;}
-                    }
-                }               
-           
-            default: {
-                switch (column) {
-                    case 65: {PieceIntf p = new Rook(tempPos); return p;}
-                    case 72: {PieceIntf p = new Rook(tempPos); return p;}
-                    case 66: {PieceIntf p = new Knight(tempPos); return p;}
-                    case 71: {PieceIntf p = new Knight(tempPos); return p;}
-                    case 67: {PieceIntf p = new Bishop(tempPos); return p;}
-                    case 70: {PieceIntf p = new Bishop(tempPos); return p;}
-                    case 68: {PieceIntf p = new King(tempPos); return p;}
-                    case 69: {PieceIntf p = new Queen(tempPos); return p;}
-                    default:  {return null;}
-                }
-            }
+        boolean isWhite=true;
+        while(gameIsNotOver()){
+            if(isWhite){        
+                //getCurrPiece(getUserInput("White"));
+
+               // getCurrPiece(getCurrPos(getUserInput("White")));
+
+               // getCurrPiece(getUserInputTargetPos());
+
+                move( getCurrPiece(getCurrPos(getUserInput("White"))) , getCurrPiece(getUserInputTargetPos()) );         
+                
+
+
+                isWhite=false;
+
+        }
+        else{           
+
+            move( getCurrPiece(getCurrPos(getUserInput("Black"))) , getCurrPiece(getUserInputTargetPos()) );   
+
+            isWhite=true;
+        }
+       
+            
         }
 
 
     }
 
-    public void displayCurrPos(ArrayList<ArrayList<Box>> board){
 
-        String piecename ;
 
-        for (int i = 0; i < board.size(); i++) {
-            for (int j = 0; j < board.get(i).size(); j++) {
+    private void move(Box currPiece, Box TarPiece) {
+        if(isValidMove());
+        System.out.println("move done..........");
+    }
 
-                if(board.get(i).get(j).getPiece() != null)
-                     piecename = board.get(i).get(j).getPiece().name();
-                else
-                     piecename = "null";
 
-                System.out.print(board.get(i).get(j).getPos() +"-"+ piecename + " ");
-            }
-            System.out.println();
-        }
 
+    private boolean isValidMove() {
+        return true;        
+    }
+
+
+
+    private Position getUserInputTargetPos() {
+
+        Scanner sc= new Scanner(System.in);    //System.in is a standard input stream  
+        System.out.println("Enter the Tagert Position: ");  
+        return getCurrPos(sc.next());
+    }
+
+
+
+    private Position getCurrPos(String userInput) {
+
+        Position position = new Position();
+        
+        int row=Integer.parseInt(userInput.substring(0,1)) - 1;
+        int col=(int)userInput.charAt(1) - 65;
+
+        position.setRow(row);
+        position.setCol(col);
+
+        return position;
 
     }
+
+    private Box getCurrPiece(Position position) {
+
+        Box currentBox;
+      //  System.out.println("Current piece here is:" + this.board.get(position.getRow()).get(position.getCol()).getPiece().name());
+        currentBox = new Box(this.board.get(position.getRow()).get(position.getCol()).getPos(),this.board.get(position.getRow()).get(position.getCol()).getPiece());
+
+        return currentBox;
+
+     }
+
+
+    private boolean gameIsNotOver() {
+        return true;
+    }
+
+
+
+    private String getUserInput(String Color) {
+
+        Scanner sc= new Scanner(System.in);    //System.in is a standard input stream  
+        System.out.println("*******Its the turn of "+Color+" Player*******");
+        System.out.println("Enter the Position of the Piece you want to move: ");  
+        String a= sc.next();  
+     //   sc.close();
+        return a;
+    }
+
 }
